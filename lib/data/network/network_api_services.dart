@@ -40,7 +40,8 @@ dynamic returnJsonResponse(http.Response response) {
       dynamic jsonResponse = jsonDecode(response.body);
       return jsonResponse;
     case 400:
-      throw BadRequestException("Bad request");
+      dynamic errorResponse = jsonDecode(response.body);
+      throw BadRequestException(errorResponse['error'].toString());
     default:
       throw InternetException(
           "${response.statusCode} : ${response.reasonPhrase}");
