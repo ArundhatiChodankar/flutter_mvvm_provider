@@ -5,6 +5,7 @@ import 'package:flutter_mvvm_provider/view_model/auth_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../res/widgets/round_button.dart';
+import '../utils/routes/routes_names.dart';
 import '../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -36,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final authViewModel = Provider.of<AuthViewModel>(context);
     return Scaffold(
       appBar: AppBar(
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: const Icon(Icons.visibility_off),
                           ),
-                    label: const Text("Password"),
+                    label: const Text(AppStrings.password),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -123,6 +123,12 @@ class _LoginScreenState extends State<LoginScreen> {
                    authViewModel.loginApi(data, context);
                   }
                 }),
+            const VerticalSpace(50),
+            InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, RouteNames.signup);
+                },
+                child:  Text(AppStrings.signUpLink))
           ],
         ),
       ),
