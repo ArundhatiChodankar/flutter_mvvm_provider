@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_provider/repository/auth_repository.dart';
+import 'package:flutter_mvvm_provider/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
+import '../models/user_model.dart';
+import '../utils/routes/routes_names.dart';
 import '../utils/utils.dart';
 
 class AuthViewModel with ChangeNotifier {
@@ -27,7 +31,11 @@ class AuthViewModel with ChangeNotifier {
     setLoading(true);
     authRepository.loginApi(data).then((value) {
       setLoading(false);
+
+      final userPreference = Provider.of<UserViewModel>(context, listen: false);
+      userPreference.saveUser(UserModel(token: value['token'].toString()));
       Utils.flushBarErrorMessage('Login Successful', context);
+      Navigator.pushNamed(context, RouteNames.home);
     }).onError((error, stackTrace) {
       setLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);
@@ -40,6 +48,7 @@ class AuthViewModel with ChangeNotifier {
     authRepository.signUpApi(data).then((value) {
       setSignUpLoading(false);
       Utils.flushBarErrorMessage('SignUp Successful', context);
+      Navigator.pushNamed(context, RouteNames.home);
     }).onError((error, stackTrace) {
       setSignUpLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);
