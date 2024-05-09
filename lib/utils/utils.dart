@@ -45,4 +45,15 @@ class Utils{
     current!.unfocus();
     FocusScope.of(context).requestFocus(next);
   }
+
+
+  static double averageRatings(List<int> ratings) {
+    double avg = 0;
+    for (int i = 0; i < ratings.length; i++) {
+      avg += ratings[i];
+    }
+    avg /= ratings.length;
+
+    return avg;
+  }
 }
