@@ -8,11 +8,12 @@ import '../utils/routes/routes_names.dart';
 import '../utils/utils.dart';
 
 class AuthViewModel with ChangeNotifier {
-
   bool _loading = false;
+
   bool get loading => _loading;
 
   bool _signUpLoading = false;
+
   bool get signUpLoading => _signUpLoading;
 
   setLoading(bool value) {
@@ -31,9 +32,9 @@ class AuthViewModel with ChangeNotifier {
     setLoading(true);
     authRepository.loginApi(data).then((value) {
       setLoading(false);
-
+      final user = UserModel.fromJson(value);
       final userPreference = Provider.of<UserViewModel>(context, listen: false);
-      userPreference.saveUser(UserModel(token: value['token'].toString()));
+      userPreference.saveUser(user);
       Utils.flushBarErrorMessage('Login Successful', context);
       Navigator.pushNamed(context, RouteNames.home);
     }).onError((error, stackTrace) {
