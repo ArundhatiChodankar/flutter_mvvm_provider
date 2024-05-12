@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -26,6 +25,7 @@ class NetworkApiServices extends BaseApiServices {
 
   @override
   Future getPostApiResponse(String url, data) async {
+    print(''+data.toString());
     dynamic jsonResponse;
     try {
       final response = await _dio
@@ -43,10 +43,11 @@ dynamic returnJsonResponse(Response<dynamic> response) {
     case 200:
       return response.data;
     case 400:
-      dynamic errorResponse = jsonDecode(response.data);
-      throw BadRequestException(errorResponse['error'].toString());
+      throw BadRequestException(response.data);
+    case 401:
+      throw UnauthorizedException(response.data);
     default:
       throw InternetException(
-          "${response.statusCode} : ${response.statusMessage}");
+          'Error occurred while communicating with server with status code${response.statusCode}');
   }
 }
