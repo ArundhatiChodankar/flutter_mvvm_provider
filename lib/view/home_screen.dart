@@ -15,19 +15,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeViewModel hm = HomeViewModel();
+
   @override
   void initState() {
     super.initState();
     hm.fetchProductsListApi();
   }
+
   @override
   Widget build(BuildContext context) {
-
     final preferences = Provider.of<UserViewModel>(context);
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Home Screen"),
         centerTitle: true,
+        backgroundColor: Colors.pink,
         automaticallyImplyLeading: false,
         actions: [
           InkWell(
@@ -37,11 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, RouteNames.login);
               });
             },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Ink(
-                child: const Text("Logout"),
-              ),
+            child: Ink(
+              child: const Text("Logout"),
             ),
           ),
           const SizedBox(
@@ -49,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body : ChangeNotifierProvider<HomeViewModel>(
-    create: (context) => hm,
-    child:Consumer<HomeViewModel>(
+      body: ChangeNotifierProvider<HomeViewModel>(
+        create: (context) => hm,
+        child: Consumer<HomeViewModel>(
           builder: (context, value, child) {
-          switch (value.productsList.status) {
+            switch (value.productsList.status) {
               case Status.loading:
                 return const Center(
                   child: CircularProgressIndicator(
@@ -72,14 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
-                          title: Text(value.productsList.data![index].title
-                              .toString()),
+                          title: Text(
+                              value.productsList.data![index].title.toString()),
                           subtitle: Text(value
                               .productsList.data![index].category
                               .toString()),
                           leading: Image.network(
-                            value.productsList.data![index].image
-                                .toString(),
+                            value.productsList.data![index].image.toString(),
                             errorBuilder: (context, error, stackTrace) {
                               return const Icon(
                                 Icons.error,
@@ -90,12 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 40,
                             fit: BoxFit.cover,
                           ),
-                          trailing:
-                              Text(
-                                value
-                                    .productsList.data![index].price.toString())
-                              ,
-
+                          trailing: Text(
+                              value.productsList.data![index].price.toString()),
                         ),
                       );
                     });
@@ -104,8 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Container();
             }
           },
-      ),
+        ),
       ),
     );
   }
+
+
 }
+
+

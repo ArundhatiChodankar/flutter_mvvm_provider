@@ -36,7 +36,7 @@ class AuthViewModel with ChangeNotifier {
       final userPreference = Provider.of<UserViewModel>(context, listen: false);
       userPreference.saveUser(user);
       Utils.flushBarErrorMessage('Login Successful', context);
-      Navigator.pushNamed(context, RouteNames.home);
+      Navigator.pushReplacementNamed(context, RouteNames.home);
     }).onError((error, stackTrace) {
       setLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);
@@ -49,7 +49,7 @@ class AuthViewModel with ChangeNotifier {
     authRepository.signUpApi(data).then((value) {
       setSignUpLoading(false);
       Utils.flushBarErrorMessage('SignUp Successful', context);
-      Navigator.pushNamed(context, RouteNames.home);
+      Navigator.pushReplacementNamed(context, RouteNames.home);
     }).onError((error, stackTrace) {
       setSignUpLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);

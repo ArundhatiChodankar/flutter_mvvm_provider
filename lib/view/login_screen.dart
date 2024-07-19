@@ -15,7 +15,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-
 class _LoginScreenState extends State<LoginScreen> {
   final ValueNotifier<bool> _obsecureNotifier = ValueNotifier<bool>(true);
 
@@ -24,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
-
 
   @override
   void dispose() {
@@ -81,13 +79,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     suffixIcon: _obsecureNotifier.value
                         ? InkWell(
                             onTap: () {
-                              _obsecureNotifier.value = !_obsecureNotifier.value;
+                              _obsecureNotifier.value =
+                                  !_obsecureNotifier.value;
                             },
                             child: const Icon(Icons.visibility),
                           )
                         : InkWell(
                             onTap: () {
-                              _obsecureNotifier.value = !_obsecureNotifier.value;
+                              _obsecureNotifier.value =
+                                  !_obsecureNotifier.value;
                             },
                             child: const Icon(Icons.visibility_off),
                           ),
@@ -109,18 +109,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     Utils.flushBarErrorMessage(
                         AppStrings.emailPasswordEmptyError, context);
                   } else if (_emailController.text.isEmpty) {
-                    Utils.flushBarErrorMessage(AppStrings.emailEmptyError, context);
-                  }  else if (_passwordController.text.isEmpty) {
-                    Utils.flushBarErrorMessage(AppStrings.passwordEmptyError, context);
-                  } else if (_passwordController.text.length<6) {
-                    Utils.flushBarErrorMessage(AppStrings.passwordLengthError, context);
+                    Utils.flushBarErrorMessage(
+                        AppStrings.emailEmptyError, context);
+                  } else if (_passwordController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        AppStrings.passwordEmptyError, context);
+                  } else if (_passwordController.text.length < 6) {
+                    Utils.flushBarErrorMessage(
+                        AppStrings.passwordLengthError, context);
                   } else {
-                   Map data = {
-                     'email':_emailController.text.toString(),
-                     'password':_passwordController.text.toString()
-                   };
+                    Map data = {
+                      'email': _emailController.text.toString(),
+                      'password': _passwordController.text.toString()
+                    };
 
-                   authViewModel.loginApi(data, context);
+                    authViewModel.loginApi(data, context);
                   }
                 }),
             const VerticalSpace(50),
@@ -128,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   Navigator.pushNamed(context, RouteNames.signup);
                 },
-                child:  Text(AppStrings.signUpLink))
+                child: Text(AppStrings.signUpLink))
           ],
         ),
       ),

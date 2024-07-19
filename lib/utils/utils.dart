@@ -3,7 +3,7 @@ import 'package:another_flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Utils{
+class Utils {
   static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -45,7 +45,6 @@ class Utils{
     current!.unfocus();
     FocusScope.of(context).requestFocus(next);
   }
-
 
   static double averageRatings(List<int> ratings) {
     double avg = 0;

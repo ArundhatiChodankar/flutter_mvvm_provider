@@ -3,16 +3,15 @@ class AppExceptions implements Exception {
 
   AppExceptions([this._message, this._prefix]);
 
-
   @override
   String toString() {
     return "$_prefix: $_message";
   }
-
 }
 
 class InternetException extends AppExceptions {
-  InternetException([String? message]) : super(message, "No Internet Connection");
+  InternetException([String? message])
+      : super(message, "No Internet Connection");
 }
 
 class ServerTimeOut extends AppExceptions {
@@ -20,9 +19,9 @@ class ServerTimeOut extends AppExceptions {
 }
 
 class BadRequestException extends AppExceptions {
-  BadRequestException([String? message]) : super(message, "Bad Request Exception");
+  BadRequestException([String? message])
+      : super(message, "Bad Request Exception");
 }
-
 
 class InvalidInputException extends AppExceptions {
   InvalidInputException([String? message])

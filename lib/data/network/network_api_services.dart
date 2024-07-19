@@ -7,15 +7,13 @@ import '../app_exceptions.dart';
 import 'base_api_services.dart';
 
 class NetworkApiServices extends BaseApiServices {
-
   final _dio = DioService().dio;
 
   @override
   Future getGetApiResponse(String url) async {
     dynamic jsonResponse;
     try {
-      final response =
-          await _dio.get(url);
+      final response = await _dio.get(url);
       jsonResponse = returnJsonResponse(response);
     } on SocketException {
       throw InternetException("NO Internet is available right now");
@@ -25,11 +23,10 @@ class NetworkApiServices extends BaseApiServices {
 
   @override
   Future getPostApiResponse(String url, data) async {
-    print(''+data.toString());
+    print('' + data.toString());
     dynamic jsonResponse;
     try {
-      final response = await _dio
-          .post(url, data: data);
+      final response = await _dio.post(url, data: data);
       jsonResponse = returnJsonResponse(response);
     } on SocketException {
       throw InternetException("NO Internet is available right now");

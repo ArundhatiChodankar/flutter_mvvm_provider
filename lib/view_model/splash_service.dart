@@ -12,11 +12,11 @@ class SplashService {
     if (user!.token.toString() == "null" || user.token.toString() == "") {
       await Future.delayed(const Duration(seconds: 3));
       if (!context.mounted) return;
-      Navigator.pushNamed(context, RouteNames.login);
+      Navigator.pushReplacementNamed(context, RouteNames.login);
     } else {
       await Future.delayed(const Duration(seconds: 3));
       if (!context.mounted) return;
-      Navigator.pushNamed(context, RouteNames.home);
+      Navigator.pushReplacementNamed(context, RouteNames.home);
     }
   }
 }

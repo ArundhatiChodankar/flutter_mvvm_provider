@@ -8,22 +8,21 @@ class AuthRepository {
 
   Future<dynamic> loginApi(dynamic data) async {
     try {
-      final response = await _network.getPostApiResponse(AppUrls.loginEndPoint, data);
+      final response =
+          await _network.getPostApiResponse(AppUrls.loginEndPoint, data);
       return response;
     } catch (e) {
       rethrow; //Big Brain
     }
   }
-
 
   Future<dynamic> signUpApi(dynamic data) async {
     try {
       final response =
-      await _network.getPostApiResponse(AppUrls.registerEndPoint, data);
+          await _network.getPostApiResponse(AppUrls.registerEndPoint, data);
       return response;
     } catch (e) {
       rethrow; //Big Brain
     }
   }
-
 }

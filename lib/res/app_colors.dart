@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 
-class AppColors{
+class AppColors {
   static var buttonColor = Colors.green;
-
 }

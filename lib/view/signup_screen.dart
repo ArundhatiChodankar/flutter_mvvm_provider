@@ -16,7 +16,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final ValueNotifier<bool> _obsecureNotifier = ValueNotifier<bool>(true);
 
   final TextEditingController _emailController = TextEditingController();
@@ -79,17 +78,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: _obsecureNotifier.value
                         ? InkWell(
-                      onTap: () {
-                        _obsecureNotifier.value = !_obsecureNotifier.value;
-                      },
-                      child: const Icon(Icons.visibility),
-                    )
+                            onTap: () {
+                              _obsecureNotifier.value =
+                                  !_obsecureNotifier.value;
+                            },
+                            child: const Icon(Icons.visibility),
+                          )
                         : InkWell(
-                      onTap: () {
-                        _obsecureNotifier.value = !_obsecureNotifier.value;
-                      },
-                      child: const Icon(Icons.visibility_off),
-                    ),
+                            onTap: () {
+                              _obsecureNotifier.value =
+                                  !_obsecureNotifier.value;
+                            },
+                            child: const Icon(Icons.visibility_off),
+                          ),
                     label: const Text(AppStrings.password),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -108,15 +109,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Utils.flushBarErrorMessage(
                         AppStrings.emailPasswordEmptyError, context);
                   } else if (_emailController.text.isEmpty) {
-                    Utils.flushBarErrorMessage(AppStrings.emailEmptyError, context);
-                  }  else if (_passwordController.text.isEmpty) {
-                    Utils.flushBarErrorMessage(AppStrings.passwordEmptyError, context);
-                  } else if (_passwordController.text.length<6) {
-                    Utils.flushBarErrorMessage(AppStrings.passwordLengthError, context);
+                    Utils.flushBarErrorMessage(
+                        AppStrings.emailEmptyError, context);
+                  } else if (_passwordController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        AppStrings.passwordEmptyError, context);
+                  } else if (_passwordController.text.length < 6) {
+                    Utils.flushBarErrorMessage(
+                        AppStrings.passwordLengthError, context);
                   } else {
                     Map data = {
-                      'email':_emailController.text.toString(),
-                      'password':_passwordController.text.toString()
+                      'email': _emailController.text.toString(),
+                      'password': _passwordController.text.toString()
                     };
 
                     authViewModel.signUpApi(data, context);

@@ -6,12 +6,12 @@ import '../res/app_urls.dart';
 
 class HomeRepository {
   final BaseApiServices _apiServices = NetworkApiServices();
+
   Future<List<ProductModel>> fetchProductsList() async {
     try {
       debugPrint("first line fetchProductsList function");
-      List response =
-          await _apiServices.getGetApiResponse(AppUrls.productsUrl);
-       return response.map((e) => ProductModel.fromJson(e)).toList();
+      List response = await _apiServices.getGetApiResponse(AppUrls.productsUrl);
+      return response.map((e) => ProductModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }
